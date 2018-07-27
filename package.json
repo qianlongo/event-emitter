@@ -1,0 +1,28 @@
+{
+  "name": "event-emitter",
+  "version": "1.0.0",
+  "description": "Evented",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "standard",
+    "validate": "npm ls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qianlongo/event-emitter.git"
+  },
+  "author": "qianlongo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qianlongo/event-emitter/issues"
+  },
+  "homepage": "https://github.com/qianlongo/event-emitter#readme",
+  "devDependencies": {
+    "precommit-hook": "^3.0.0",
+    "standard": "^11.0.1"
+  },
+  "pre-commit": [
+    "lint"
+  ]
+}
