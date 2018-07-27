@@ -9,13 +9,5 @@ export const isValidListener = (listener) => {
 }
 
 export const forEach = (array, cb) => {
-  if (Array.isArray(array)) {
-    array.forEach((it, i) => {
-      cb(it, i)
-    })
-  } else {
-    Object.keys(array).forEach((key) => {
-      cb(array[key], key)
-    })
-  }
+  Array.isArray(array) ? array.forEach(cb) : Object.keys(array).forEach((key) => cb(array[key], key))
 }
