@@ -91,6 +91,21 @@ class EventEmitter {
   removeListeners (evt, listeners) {
     return this.manipulateListeners(true, evt, listeners)
   }
+
+  manipulateListeners (remove, evt, listeners) {
+    let single = remove ? this.removeListener : this.addListener
+    let multiple = remove ? this.removeListeners : this.addListeners
+
+    if (typeof evt === 'object' && !(evt instanceof RegExp)) {
+      forEach(evt, (listener, key) => {
+        typeof listener === 'function' ? single.call(this, key, listener) : multiple.call(this, key, listener)
+      })
+    } else {
+      forEach(listeners, (listener) => single.call(this, evt, listener))
+    }
+
+    return this
+  }
 }
 
 EventEmitter.prototype.on = EventEmitter.prototype.alias('addListener')
