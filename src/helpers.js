@@ -8,6 +8,6 @@ export const isValidListener = (listener) => {
   }
 }
 
-export const forEach = (array, cb) => {
-  Array.isArray(array) ? array.forEach(cb) : Object.keys(array).forEach((key) => cb(array[key], key))
+export const forEach = (obj, cb) => {
+  Array.isArray(obj) ? obj.forEach(cb) : Object.keys(obj).forEach((key) => cb(obj[key], key))
 }
