@@ -31,7 +31,7 @@ class EventEmitter {
   getListenersAsObject (evt) {
     let listeners = this.getListeners(evt)
 
-    return Array.isArray(listeners) ? { evt: listeners } : listeners
+    return Array.isArray(listeners) ? { [ evt ]: listeners } : listeners
   }
 
   addListener (evt, listener) {
@@ -42,7 +42,7 @@ class EventEmitter {
     let listeners = this.getListenersAsObject(evt)
     let listenerIsWrapped = typeof listener === 'object'
 
-    forEach(listeners, (it, key) => {
+    forEach(listeners, (it) => {
       !it.includes(listener) && it.push(listenerIsWrapped ? listener : { listener, once: false })
     })
 
@@ -57,7 +57,7 @@ class EventEmitter {
   }
 
   defineEvent (evt) {
-    this.defineEvent(evt)
+    this.getListeners(evt)
 
     return this
   }
