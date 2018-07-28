@@ -106,6 +106,20 @@ class EventEmitter {
 
     return this
   }
+
+  removeEvent (evt) {
+    let events = this._getEvents()
+
+    if (typeof evt === 'string') {
+      delete events[evt]
+    } else if (evt instanceof RegExp) {
+      forEach(events, (event, key) => evt.test(key) && delete[events[key]])
+    } else {
+      delete this._events
+    }
+
+    return this
+  }
 }
 
 EventEmitter.prototype.on = EventEmitter.prototype.alias('addListener')
