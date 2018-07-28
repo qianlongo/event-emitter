@@ -152,6 +152,10 @@ class EventEmitter {
 
     return this
   }
+
+  _getOnceReturnValue () {
+    return this.hasOwnProperty('_onceReturnValue') ? this._onceReturnValue : true
+  }
 }
 
 EventEmitter.prototype.on = EventEmitter.prototype.alias('addListener')
