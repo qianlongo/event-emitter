@@ -120,10 +120,38 @@ class EventEmitter {
 
     return this
   }
+
+  emitEvent (evt, args = []) {
+    let listenersMap = this.getListenersAsObject(evt)
+    let response
+    forEach(listenersMap, (listeners) => {
+      listeners = listeners.slice(0)
+
+      forEach(listeners, (listener) => {
+        if (listener.once) {
+          this.removeListener(evt, listener.listener)
+        }
+
+        response = listener.listener.apply(this, args)
+        // TODO:
+        if (response == this._getOnceReturnValue()) {
+          this.removeListener(evt, listener.listener)
+        }
+      })
+    })
+
+    return this
+  }
+
+  emit (evt, ...args) {
+    return this.emitEvent(evt, args)
+  }
 }
 
 EventEmitter.prototype.on = EventEmitter.prototype.alias('addListener')
 EventEmitter.prototype.once = EventEmitter.prototype.alias('addOnceListener')
 EventEmitter.prototype.off = EventEmitter.prototype.alias('removeListener')
+EventEmitter.prototype.removeAllListeners = EventEmitter.prototype.alias('removeEvent')
+EventEmitter.prototype.trigger = EventEmitter.prototype.alias('emitEvent')
 
 export default EventEmitter
