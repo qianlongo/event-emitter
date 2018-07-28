@@ -9,7 +9,6 @@ class EventEmitter {
   }
 
   getListeners (evt) {
-    // TODO:
     let events = this._getEvents()
     let response
 
@@ -84,7 +83,6 @@ class EventEmitter {
   }
 
   addListeners (evt, listeners) {
-    // TODO:
     return this.manipulateListeners(false, evt, listeners)
   }
 
@@ -133,7 +131,7 @@ class EventEmitter {
         }
 
         response = listener.listener.apply(this, args)
-        // TODO:
+
         if (response == this._getOnceReturnValue()) {
           this.removeListener(evt, listener.listener)
         }
@@ -155,6 +153,10 @@ class EventEmitter {
 
   _getOnceReturnValue () {
     return this.hasOwnProperty('_onceReturnValue') ? this._onceReturnValue : true
+  }
+
+  _getEvents () {
+    return this._events || (this._events = {})
   }
 }
 
