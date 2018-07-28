@@ -146,6 +146,12 @@ class EventEmitter {
   emit (evt, ...args) {
     return this.emitEvent(evt, args)
   }
+
+  setOnceReturnValue (value) {
+    this._onceReturnValue = value
+
+    return this
+  }
 }
 
 EventEmitter.prototype.on = EventEmitter.prototype.alias('addListener')
